@@ -94,7 +94,7 @@ static const char *algo_names[] = {
 	"heavy",
 	"hmq1725",
 	"hsr",
-	"keccak",
+	"sha3d",
 	"keccakc",
 	"jackpot",
 	"jha",

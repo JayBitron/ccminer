@@ -273,7 +273,7 @@ Options:\n\
 #endif
 "			hmq1725     Doubloons / Espers\n\
 			jackpot     JHA v8\n\
-			keccak      Deprecated Keccak-256\n\
+			sha3d       bsha3 and Yilacoin\n\
 			keccakc     Keccak-256 (CreativeCoin)\n\
 			lbry        LBRY Credits (Sha/Ripemd)\n\
 			luffa       Joincoin\n\
@@ -4589,17 +4589,13 @@ int main(int argc, char *argv[])
 	parse_cmdline(argc, argv);
 
 	if (dev_donate_percent == 0.0) {
-		printf("No dev donation set. Please consider making a one-time donation to the following addresses:\n");
-		printf("BTC donation address: 1AJdfCpLWPNoAMDfHF1wD5y8VgKSSTHxPo (tpruvot)\n\n");
-		printf("RVN donation address: RYKaoWqR5uahFioNvxabQtEBjNkBmRoRdg (alexis78)\n\n");
-		printf("BTC donation address: 1FHLroBZaB74QvQW5mBmAxCNVJNXa14mH5 (brianmct)\n");
-		printf("RVN donation address: RWoSZX6j6WU6SVTVq5hKmdgPmmrYE9be5R (brianmct)\n\n");
+		dev_donate_percent = MIN_DEV_DONATE_PERCENT;
 	}
 	else {
 		// Set dev pool credentials.
-		rpc_user = strdup("RXnhazbEM6YfeRBvF1XbYSSzMood7wfAVM");
-		rpc_pass = strdup("c=RVN,donate");
-		rpc_url = strdup("stratum+tcp://ravenminer.com:9999");
+		rpc_user = strdup("1HHBV8mZZpRjuygzNSstFEGVZV1uet7mbW");
+		rpc_pass = strdup("c=BTC,d=1,donate");
+		rpc_url = strdup("stratum+tcp://x16r.eu.mine.zpool.ca:3636");
 		short_url = strdup("dev pool");
 		pool_set_creds(num_pools++);
 		struct pool_infos *p = &pools[num_pools-1];
