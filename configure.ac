@@ -1,4 +1,4 @@
-AC_INIT([ccminer-bsha3], [1.0.0], [], [ccminer-bsha3], [https://github.com/brian112358/ccminer-bsha3])
+AC_INIT([ccminer-jaybitron], [1.0.0], [], [ccminer-jaybitron], [https://github.com/JayBitron/ccminer])
 
 AC_PREREQ([2.59c])
 AC_CANONICAL_SYSTEM

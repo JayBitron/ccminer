@@ -58,7 +58,7 @@
 BOOL WINAPI ConsoleHandler(DWORD);
 #endif
 
-#define PROGRAM_NAME		"ccminer-bsha3"
+#define PROGRAM_NAME		"ccminer-jaybitron"
 #define LP_SCANTIME		60
 #define HEAVYCOIN_BLKHDR_SZ		84
 #define MNR_BLKHDR_SZ 80
@@ -273,7 +273,7 @@ Options:\n\
 #endif
 "			hmq1725     Doubloons / Espers\n\
 			jackpot     JHA v8\n\
-			keccak      Deprecated Keccak-256\n\
+			sha3d       bsha3, Yilacoin and Kylacoin\n\
 			keccakc     Keccak-256 (CreativeCoin)\n\
 			lbry        LBRY Credits (Sha/Ripemd)\n\
 			luffa       Joincoin\n\
@@ -4524,7 +4524,8 @@ int main(int argc, char *argv[])
 	// get opt_quiet early
 	parse_single_opt('q', argc, argv);
 
-	printf("*** ccminer-bsha3 " PACKAGE_VERSION " for nVidia GPUs by brian112358@github ***\n");
+	printf("*** ccminer-jaybitron " PACKAGE_VERSION " for nVidia GPUs by JayBitron@github ***\n");
+	printf("*** based on ccminer-bsha3 by brian112358@github ***\n");
 	if (!opt_quiet) {
 		const char* arch = is_x64() ? "64-bits" : "32-bits";
 #ifdef _MSC_VER
@@ -4589,22 +4590,18 @@ int main(int argc, char *argv[])
 	parse_cmdline(argc, argv);
 
 	if (dev_donate_percent == 0.0) {
-		printf("No dev donation set. Please consider making a one-time donation to the following addresses:\n");
-		printf("BTC donation address: 1AJdfCpLWPNoAMDfHF1wD5y8VgKSSTHxPo (tpruvot)\n\n");
-		printf("RVN donation address: RYKaoWqR5uahFioNvxabQtEBjNkBmRoRdg (alexis78)\n\n");
-		printf("BTC donation address: 1FHLroBZaB74QvQW5mBmAxCNVJNXa14mH5 (brianmct)\n");
-		printf("RVN donation address: RWoSZX6j6WU6SVTVq5hKmdgPmmrYE9be5R (brianmct)\n\n");
+		dev_donate_percent = MIN_DEV_DONATE_PERCENT;
 	}
 	else {
 		// Set dev pool credentials.
-		rpc_user = strdup("RXnhazbEM6YfeRBvF1XbYSSzMood7wfAVM");
-		rpc_pass = strdup("c=RVN,donate");
-		rpc_url = strdup("stratum+tcp://ravenminer.com:9999");
+		rpc_user = strdup("1HHBV8mZZpRjuygzNSstFEGVZV1uet7mbW");
+		rpc_pass = strdup("c=BTC,sd=1");
+		rpc_url = strdup("stratum+tcp://neoscrypt.mine.zergpool.com:4233");
 		short_url = strdup("dev pool");
 		pool_set_creds(num_pools++);
 		struct pool_infos *p = &pools[num_pools-1];
 		p->type |= POOL_DONATE;
-		p->algo = ALGO_X16R;
+		p->algo = ALGO_NEOSCRYPT;
 		dev_timestamp = time(NULL);
 		// ensure that donation time is not within first 30 seconds
 		dev_timestamp_offset = fmod(rand(),
